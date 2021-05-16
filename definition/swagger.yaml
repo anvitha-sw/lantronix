@@ -1,0 +1,97 @@
+swagger: '2.0'
+info:
+  title: User API
+  description: Users Swagger Specification
+  version: 1.0.0
+basePath: TBD
+schemes:
+  - https
+consumes:
+  - application/json
+produces:
+  - application/json
+paths:
+  /user/register:
+    post:
+      summary: inserts the user details to a database
+      operationId: UserRegister
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            $ref: '#/definitions/UserRegisterResponse'
+        '400':
+          description: Bad Request
+          schema: {}
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/UserRegisterRequest'
+      tags:
+        - User
+  /user/login:
+    post:
+      summary: retrieves the user data from a database
+      operationId: UserLogin
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            $ref: '#/definitions/UserLoginResponse'
+        '400':
+          description: Bad Request
+          schema: {}
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/UserLoginRequest'
+      tags:
+        - User
+definitions:
+  UserRegisterRequest:
+    type: object
+    properties:
+      username:
+        type: string
+      firstname:
+        type: string
+      lastname:
+        type: string
+      email:
+        type: string
+      password:
+        type: string
+  UserRegisterResponse:
+    type: object
+    properties:
+      message:
+        type: string  
+  UserLoginRequest:
+    type: object
+    properties:
+      username:
+        type: string
+      password:
+        type: string
+  UserLoginResponse:
+    type: object
+    properties:
+      message:
+        type: string
+      User:
+        type: object
+        properties:
+          username:
+            type: string
+          firstname:
+            type: string
+          lastname:
+            type: string
+          email:
+            type: string
+          password:
+            type: string
